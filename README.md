@@ -1,5 +1,20 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Structure
+
+- `public/` : Fichier statiques
+- `src/` : Sources du projet
+  - `app/` : Component racine du projet
+  - `components/` : Components communs au projet et réutilisables globalement
+  - `domains/` : Chaque sous-dossier réprésente un domaine et contient tous les fichiers
+associés à ce domaine
+    - `*/components/` : Components relatifs à ce domaine
+    - `*/services/` : Contient la logique relative à ce domaine
+      - `resources.js` : Contient les dépendances externes (appels HTTP, etc.)
+      - `behaviors.js` : Contient les calculs et tout autre forme de logique externalisée d'un
+component 
+  - `lib/` : Autres ressources communes ou globales au projet 
+
 ## Available Scripts
 
 In the project directory, you can run:
