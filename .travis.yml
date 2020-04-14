@@ -9,6 +9,8 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   bucket: shopixel-webapp
   acl: public_read
+  local_dir: build
+  region: eu-west-1
   skip_cleanup: true
   on:
     repo: lekipz/shopixel-webapp
