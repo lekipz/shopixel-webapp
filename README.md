@@ -11,6 +11,7 @@ associés à ce domaine
     - `*/components/` : Components relatifs à ce domaine
     - `*/services/` : Contient la logique relative à ce domaine
       - `store.js` : Contient le store relatif à ce domaine
+      
       - `resources.js` : Contient les dépendances externes (appels HTTP, etc.)
       - `behaviors.js` : Contient les calculs et tout autre forme de logique externalisée d'un
 component 
