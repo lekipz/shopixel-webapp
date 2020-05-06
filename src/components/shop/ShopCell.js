@@ -2,6 +2,7 @@ import React from 'react';
 import BasicCell from './BasicCell';
 import ShopProductCell from './ShopProductCell';
 import ShopDoorCell from './ShopDoorCell';
+import WallCell from './WallCell';
 
 function ShopCell({config}) {
   const {type = ''} = config;
@@ -13,6 +14,8 @@ function ShopCell({config}) {
     case 'door':
       const {door} = config;
       return <ShopDoorCell door={door}/>;
+    case 'wall':
+      return <WallCell/>
     default:
       return <BasicCell/>;
   }

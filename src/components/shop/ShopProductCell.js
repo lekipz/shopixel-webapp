@@ -20,7 +20,7 @@ function ShopProductCell({product}) {
   return (
     <ProductCellContainer {...productConfig}>
       <ProductName>
-        {product.name}
+        {product.displayName}
       </ProductName>
     </ProductCellContainer>
   );
