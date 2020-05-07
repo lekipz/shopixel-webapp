@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Shop from '../components/shop/Shop';
-import storeConfiguration from '../lib/mocks/storeConfiguration';
+import Simulator from '../domains/simulator/components/Simulator';
 
 const ApplicationContainer = styled.main`
   display: flex;
@@ -12,7 +11,7 @@ const ApplicationContainer = styled.main`
 function App() {
   return (
     <ApplicationContainer>
-      <Shop rowsConfig={storeConfiguration}/>
+      <Simulator/>
     </ApplicationContainer>
   );
 }

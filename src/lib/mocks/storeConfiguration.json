@@ -1,0 +1,437 @@
+[
+  [
+    {
+      "type": "product",
+      "product": "phone",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "audio",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "computer",
+      "access": "bot"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "product",
+      "product": "awakening-toy",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "board-game",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "video-game",
+      "access": "bot"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "product",
+      "product": "fruits",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "vegetables",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "meat",
+      "access": "bot"
+    }
+  ],
+  [
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    }
+  ],
+  [
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    }
+  ],
+  [
+    {
+      "type": "product",
+      "product": "tv",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "printer",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "wiring",
+      "access": "top"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "product",
+      "product": "diaper",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "baby-food",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "baby-furniture",
+      "access": "top"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "product",
+      "product": "pasta",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "rice",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "fish",
+      "access": "top"
+    }
+  ],
+  [
+    {
+      "type": "product",
+      "product": "washing-machine",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "fridge",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "vacuum",
+      "access": "bot"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "promo"
+    },
+    {
+      "type": "promo"
+    },
+    {
+      "type": "promo"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "product",
+      "product": "beer",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "wine",
+      "access": "bot"
+    },
+    {
+      "type": "product",
+      "product": "spirituous",
+      "access": "bot"
+    }
+  ],
+  [
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    }
+  ],
+  [
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    }
+  ],
+  [
+    {
+      "type": "product",
+      "product": "sheet",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "cushion",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "table-decoration",
+      "access": "top"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "empty"
+    },
+    {
+      "type": "product",
+      "product": "screw",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "paint",
+      "access": "top"
+    },
+    {
+      "type": "product",
+      "product": "tools",
+      "access": "top"
+    }
+  ],
+  [
+    {
+      "type": "wall"
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "door",
+      "door": {
+        "arrowPosition": "top"
+      }
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "door",
+      "door": {
+        "arrowPosition": "bot"
+      }
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "wall"
+    },
+    {
+      "type": "wall"
+    }
+  ]
+]

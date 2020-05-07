@@ -23,7 +23,7 @@ export default class HttpClient {
     this.baseUrl = baseUrl;
   }
 
-  get(uri) {
+  get(uri = '') {
     return request(`${this.baseUrl}${uri}`);
   }
 }

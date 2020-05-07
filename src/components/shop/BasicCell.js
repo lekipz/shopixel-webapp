@@ -7,6 +7,7 @@ const BasicCell = styled.div`
   align-items: center;
   
   width: 8vh;
+  outline: none;
 `;
 
 export default BasicCell;
