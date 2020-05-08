@@ -1,9 +1,11 @@
 import {getGeneratedAccount, getRandomRegisteredUser} from './resources';
 import {login, register} from '../../auth/services/resources';
 
+const NEW_CUSTOMER_PROBABILITY = 0.05;
+
 export async function makeCustomerArrival(presentAccounts) {
   const rng = Math.random();
-  if (rng <= 0.65) {
+  if (rng <= NEW_CUSTOMER_PROBABILITY) {
     return registerNewCustomer();
   } else {
     const customer = await loginRandomAccount();
