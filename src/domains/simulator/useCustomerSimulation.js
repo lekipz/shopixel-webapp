@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import {makeCustomerArrival} from '../customer/services/behaviors';
 import {getShoppingList} from '../product/services/resources';
 import {findEntranceCoordinates} from './services/behaviors';
+import CustomerWorker from './workers/customer.worker';
 
 export default function useCustomerSimulation() {
   const [customers, setCustomers] = useState([]);
