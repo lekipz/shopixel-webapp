@@ -14,3 +14,20 @@ export function findEntranceCoordinates() {
     return null;
   }, null);
 }
+
+export function findProductCoordinates(productName) {
+  return STORE_CONFIG.reduce((resultRow, row, index) => {
+    if (resultRow) {
+      return resultRow;
+    }
+
+    const productCellIndex = row.findIndex(({type, product}) => type === 'product' && product === productName);
+    if (productCellIndex >= 0) {
+      const productCell = row[productCellIndex];
+      const computedRowIndex = productCell.access === 'bot' ? index + 1 : index - 1;
+      return [computedRowIndex, productCellIndex];
+    }
+
+    return null;
+  }, null);
+}
