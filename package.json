@@ -13,9 +13,8 @@
     "styled-components": "^5.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -32,5 +31,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.1.6",
+    "worker-loader": "^2.0.0"
   }
 }
