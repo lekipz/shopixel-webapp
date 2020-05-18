@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BasicCell from './BasicCell';
-import {getStylesFromProductCategory} from '../../domains/product/services/behaviors';
+import {getStylesFromProductCategory} from '../../../product/services/behaviors';
 
 const ProductName = styled.strong`
   display: flex;

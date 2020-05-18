@@ -4,7 +4,8 @@ async function request(uri, init) {
   let result;
   try {
     result = await fetch(uri, init);
-  } catch {
+  } catch(e) {
+    console.warn(e);
     throw new HttpError(0, null);
   }
 
@@ -25,5 +26,15 @@ export default class HttpClient {
 
   get(uri = '') {
     return request(`${this.baseUrl}${uri}`);
+  }
+
+  post(uri = '', body) {
+    return request(`${this.baseUrl}${uri}`, {
+      body: JSON.stringify(body),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }
