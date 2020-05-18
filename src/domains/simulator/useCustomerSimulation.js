@@ -31,7 +31,6 @@ export default function useCustomerSimulation() {
         const {row, col, targetIndex, path} = customer.travelling;
         if (path === null) {
           const targetPath = computePathToProduct(row, col, customer.shoppingList[targetIndex].name);
-          console.log('path', targetPath);
 
           return {
             ...customer,
@@ -40,12 +39,24 @@ export default function useCustomerSimulation() {
               path: targetPath
             }
           }
+        } else if (path.length > 0) {
+          const [nextCol, nextRow] = path[0];
+          const newPath = path.slice(1);
+          return {
+            ...customer,
+            travelling: {
+              ...customer.travelling,
+              path: newPath,
+              col: nextCol,
+              row: nextRow
+            }
+          };
         }
         return customer;
       });
 
       setCustomers(updatedCustomers);
-    }, 1000);
+    }, 350);
   }, [customers]);
 
   return {
