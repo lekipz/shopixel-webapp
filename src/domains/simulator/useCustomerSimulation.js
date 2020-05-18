@@ -2,26 +2,11 @@ import {useEffect, useRef, useState} from 'react';
 import {makeCustomerArrival} from '../customer/services/behaviors';
 import {getShoppingList} from '../product/services/resources';
 import {findEntranceCoordinates} from './services/behaviors';
-import CustomerWorker from './workers/customer.worker';
+import {computePathToProduct} from './services/pathfinding';
 
 export default function useCustomerSimulation() {
   const [customers, setCustomers] = useState([]);
   const hasGenerationTimeout = useRef(false);
-  const customerWorker = useRef(null);
-
-  if (customerWorker.current === null) {
-    customerWorker.current = new CustomerWorker();
-    customerWorker.current.onmessage = function(event) {
-      const [type] = event.data;
-      switch(type) {
-        case 'update-customers':
-          setCustomers(event.data[1]);
-          break;
-        default:
-          console.warn('Unknown event ' + type);
-      }
-    }
-  }
 
   useEffect(() => {
     if (!hasGenerationTimeout.current) {
@@ -32,9 +17,35 @@ export default function useCustomerSimulation() {
         }
         const newCustomer = await generateCustomer(customers);
         hasGenerationTimeout.current = false;
-        customerWorker.current.postMessage(['add-customer', newCustomer]);
+        setCustomers(c => ([
+          ...c,
+          newCustomer
+        ]));
       }, 5000);
     }
+  }, [customers]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const updatedCustomers = customers.map(customer => {
+        const {row, col, targetIndex, path} = customer.travelling;
+        if (path === null) {
+          const targetPath = computePathToProduct(row, col, customer.shoppingList[targetIndex].name);
+          console.log('path', targetPath);
+
+          return {
+            ...customer,
+            travelling: {
+              ...customer.travelling,
+              path: targetPath
+            }
+          }
+        }
+        return customer;
+      });
+
+      setCustomers(updatedCustomers);
+    }, 1000);
   }, [customers]);
 
   return {
