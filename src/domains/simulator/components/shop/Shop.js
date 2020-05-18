@@ -17,7 +17,7 @@ const BackgroundContainer = styled.div`
 function Shop({rowsConfig, customers}) {
   return (
     <ShopContainer cols={rowsConfig[0].length}>
-      {customers.map(({customer: {_id}, travelling: {row, col}}) => (
+      {customers.map(({_id, coordinates: {row, col}}) => (
         <Customer key={_id}
                   row={row}
                   col={col}/>
