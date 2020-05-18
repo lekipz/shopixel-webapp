@@ -4,6 +4,7 @@ import Shop from './shop/Shop';
 import {makeCustomerArrival} from '../../customer/services/behaviors';
 import {findEntranceCoordinates} from '../services/behaviors';
 import styled from 'styled-components';
+import {getShoppingList} from '../../product/services/resources';
 
 const ShopContainer = styled.div`
   display: flex;
@@ -21,13 +22,22 @@ function Simulator() {
       }
 
       const customer = await makeCustomerArrival(customers);
+      const generatedShoppingList = await getShoppingList(customer.profile);
+      const computedShoppingList = generatedShoppingList.map(product => ({
+        ...product,
+        status: 'pending'
+      }));
       const [row, col] = findEntranceCoordinates();
+
       setCustomers([
         ...customers,
         {
-          ...customer,
-          row,
-          col
+          customer,
+          shoppingList: computedShoppingList,
+          coordinates: {
+            row,
+            col
+          }
         }
       ]);
     }, 2000);

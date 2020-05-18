@@ -9,3 +9,7 @@ export function getAllProducts() {
 export function getProductByName(name) {
   return http.get(`/${name}`);
 }
+
+export function getShoppingList(profile) {
+  return http.get(`/shopping-list?profile=${profile}`);
+}
