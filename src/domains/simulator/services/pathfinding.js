@@ -9,12 +9,14 @@ const pathWalkConfig = {
   door: 0
 }
 
-const shopGrid = new PF.Grid(STORE_CONFIGURATION.map(row => row.map(({type}) => pathWalkConfig[type])));
-
 const pathfinder = new PF.BestFirstFinder();
 
 export function computePathToProduct(startRow, startCol, productName) {
   const [productRow, productCol] = findProductCoordinates(productName);
-  const path = pathfinder.findPath(startCol, startRow, productCol, productRow, shopGrid);
+  const path = pathfinder.findPath(startCol, startRow, productCol, productRow, createGrid());
   return path.slice(1);
+}
+
+function createGrid() {
+  return new PF.Grid(STORE_CONFIGURATION.map(row => row.map(({type}) => pathWalkConfig[type])));
 }
