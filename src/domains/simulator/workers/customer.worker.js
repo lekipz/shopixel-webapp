@@ -61,16 +61,29 @@ function mapCustomerWhenWalkingTowardsTarget(path, customer) {
   };
 }
 
+function mapCustomerOnTargetProduct(customer, targetIndex) {
+  if (customer.shoppingList[targetIndex].status === 'todo') {
+    return mapCustomerOnPurchase(customer, targetIndex);
+  } else if (customer.shoppingList[targetIndex].status === 'pending') {
+    return customer;
+  } else {
+    return mapCustomerForNextTarget(customer, targetIndex);
+  }
+}
+
 function mapCustomerOnPurchase(customer, targetIndex) {
   const newShoppingList = customer.shoppingList.slice();
   newShoppingList[targetIndex].status = 'pending';
 
   purchaseProduct(newShoppingList[targetIndex].name)
-    .then(() => {
-      const customerToUpdate = customers.find(({customer: {_id}}) => customer.customer._id === _id);
-      customerToUpdate.shoppingList[targetIndex].status = 'purchased';
-    })
-    .catch(/* TODO */);
+    .then(() => updateProductStatus(customer, targetIndex, 'purchased'))
+    .catch(error => {
+      if (error.status === 400) {
+        updateProductStatus(customer, targetIndex, 'out-of-stock');
+      } else {
+        throw error;
+      }
+    });
 
   return {
     ...customer,
@@ -89,13 +102,8 @@ function mapCustomerForNextTarget(customer, targetIndex) {
   };
 }
 
-function mapCustomerOnTargetProduct(customer, targetIndex) {
-  if (customer.shoppingList[targetIndex].status === 'todo') {
-    return mapCustomerOnPurchase(customer, targetIndex);
-  } else if (customer.shoppingList[targetIndex].status === 'pending') {
-    return customer;
-  } else {
-    return mapCustomerForNextTarget(customer, targetIndex);
-  }
+function updateProductStatus(customer, targetIndex, status) {
+  const customerToUpdate = customers.find(({customer: {_id}}) => customer.customer._id === _id);
+  customerToUpdate.shoppingList[targetIndex].status = status;
 }
 
