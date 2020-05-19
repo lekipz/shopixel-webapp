@@ -6,39 +6,46 @@ import CustomerWorker from './workers/customer.worker';
 
 export default function useCustomerSimulation() {
   const [customers, setCustomers] = useState([]);
-  const hasGenerationTimeout = useRef(false);
+  const [isRunning, setRunning] = useState(false);
+  const generationTimeoutID = useRef(null);
   const customerWorker = useRef(null);
 
-  if (customerWorker.current === null) {
-    customerWorker.current = new CustomerWorker();
-    customerWorker.current.onmessage = function(event) {
-      const [type] = event.data;
-      switch(type) {
-        case 'update-customers':
-          setCustomers(event.data[1]);
-          break;
-        default:
-          console.warn('Unknown event ' + type);
-      }
+  useEffect(() => {
+    if (isRunning && customerWorker.current === null) {
+      customerWorker.current = new CustomerWorker();
+      customerWorker.current.onmessage = function (event) {
+        const [type] = event.data;
+        switch (type) {
+          case 'update-customers':
+            setCustomers(event.data[1]);
+            break;
+          default:
+            console.warn('Unknown event ' + type);
+        }
+      };
+    } else if (!isRunning && customerWorker.current !== null) {
+      customerWorker.current.terminate();
+      customerWorker.current = null;
     }
-  }
+  }, [isRunning]);
 
   useEffect(() => {
-    if (!hasGenerationTimeout.current) {
-      hasGenerationTimeout.current = true;
-      setTimeout(async () => {
-        if (customers.length === 1) {
-          return;
-        }
+    if (isRunning && !generationTimeoutID.current) {
+      generationTimeoutID.current = setTimeout(async () => {
+        generationTimeoutID.current = null;
         const newCustomer = await generateCustomer(customers);
-        hasGenerationTimeout.current = false;
         customerWorker.current.postMessage(['add-customer', newCustomer]);
       }, 5000);
+    } else if (isRunning && !!generationTimeoutID.current) {
+      clearTimeout(generationTimeoutID.current);
+      generationTimeoutID.current = null;
     }
-  }, [customers]);
+  }, [customers, isRunning]);
 
   return {
-    customers
+    customers,
+    isRunning,
+    toggle: () => setRunning(!isRunning)
   };
 }
 
