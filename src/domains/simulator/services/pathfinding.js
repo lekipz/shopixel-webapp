@@ -17,7 +17,7 @@ export function computePathToProduct(startRow, startCol, productName) {
 }
 
 export function computePathToCoordinates(startRow, startCol, targetRow, targetCol) {
-  const path = pathfinder.findPath(startCol, startRow, targetCol, targetCol, createGrid());
+  const path = pathfinder.findPath(startCol, startRow, targetCol, targetRow, createGrid());
   return path.slice(1);
 }
 
