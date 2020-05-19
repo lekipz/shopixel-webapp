@@ -28,7 +28,7 @@ export default function useCustomerSimulation() {
       customerWorker.current.terminate();
       customerWorker.current = null;
     }
-  }, [isRunning]);
+  }, [isRunning, customers]);
 
   useEffect(() => {
     if (isRunning && !generationTimeoutID.current) {
