@@ -15,6 +15,21 @@ export function findEntranceCoordinates() {
   }, null);
 }
 
+export function findExitCoordinates() {
+  return STORE_CONFIG.reduce((resultRow, row, index) => {
+    if (resultRow) {
+      return resultRow;
+    }
+
+    const entranceCellIndex = row.findIndex(({type, door}) => type === 'door' && door.arrowPosition === 'bot');
+    if (entranceCellIndex >= 0) {
+      return [index, entranceCellIndex]
+    }
+
+    return null;
+  }, null);
+}
+
 export function findProductCoordinates(productName) {
   return STORE_CONFIG.reduce((resultRow, row, index) => {
     if (resultRow) {

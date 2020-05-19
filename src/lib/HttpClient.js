@@ -37,4 +37,14 @@ export default class HttpClient {
       }
     });
   }
+
+  put(uri = '', body) {
+    return request(`${this.baseUrl}${uri}`, {
+      body: JSON.stringify(body),
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
 }

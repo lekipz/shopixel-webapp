@@ -27,7 +27,7 @@ export default function useCustomerSimulation() {
     if (!hasGenerationTimeout.current) {
       hasGenerationTimeout.current = true;
       setTimeout(async () => {
-        if (customers.length === 5) {
+        if (customers.length === 1) {
           return;
         }
         const newCustomer = await generateCustomer(customers);
@@ -47,7 +47,7 @@ async function generateCustomer(customers) {
   const generatedShoppingList = await getShoppingList(customer.profile);
   const computedShoppingList = generatedShoppingList.map(product => ({
     ...product,
-    status: 'pending'
+    status: 'todo'
   }));
   const [row, col] = findEntranceCoordinates();
 

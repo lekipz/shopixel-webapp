@@ -13,7 +13,11 @@ const pathfinder = new PF.BestFirstFinder();
 
 export function computePathToProduct(startRow, startCol, productName) {
   const [productRow, productCol] = findProductCoordinates(productName);
-  const path = pathfinder.findPath(startCol, startRow, productCol, productRow, createGrid());
+  return computePathToCoordinates(startRow, startCol, productRow, productCol);
+}
+
+export function computePathToCoordinates(startRow, startCol, targetRow, targetCol) {
+  const path = pathfinder.findPath(startCol, startRow, targetCol, targetRow, createGrid());
   return path.slice(1);
 }
 

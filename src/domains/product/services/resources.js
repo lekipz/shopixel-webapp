@@ -6,8 +6,8 @@ export function getAllProducts() {
   return http.get();
 }
 
-export function getProductByName(name) {
-  return http.get(`/${name}`);
+export function purchaseProduct(productName) {
+  return http.put(`/${productName}/purchase`);
 }
 
 export function getShoppingList(profile) {
