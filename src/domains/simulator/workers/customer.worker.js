@@ -1,7 +1,9 @@
-import {computePathToProduct} from '../services/pathfinding';
+import {computePathToCoordinates, computePathToProduct} from '../services/pathfinding';
 import {purchaseProduct} from '../../product/services/resources';
+import {findExitCoordinates} from '../services/behaviors';
 
 let customers = [];
+const [exitRow, exitCol] = findExitCoordinates();
 
 onmessage = function (event) {
   const [type] = event.data;
@@ -17,6 +19,10 @@ onmessage = function (event) {
 setInterval(() => {
   const updatedCustomers = customers.map(customer => {
     const {row, col, targetIndex, path} = customer.travelling;
+    if (row === exitRow && col === exitCol) {
+      // TODO : add transaction and remove customer from list
+    }
+
     if (path === null) {
       return mapCustomerToNextPath(row, col, customer, targetIndex);
     } else if (path.length > 0) {
@@ -33,7 +39,12 @@ setInterval(() => {
 // ======================================================================
 
 function mapCustomerToNextPath(row, col, customer, targetIndex) {
-  const targetPath = computePathToProduct(row, col, customer.shoppingList[targetIndex].name);
+  let targetPath;
+  if (customer.shoppingList.length === targetIndex) {
+    targetPath = computePathToCoordinates(row, col, exitRow, exitCol);
+  } else {
+    targetPath = computePathToProduct(row, col, customer.shoppingList[targetIndex].name);
+  }
 
   return {
     ...customer,
