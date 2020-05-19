@@ -11,6 +11,9 @@ onmessage = function (event) {
     case 'add-customer':
       customers.push(event.data[1]);
       break;
+    case 'set-customers':
+      customers = event.data[1].slice();
+      break;
   }
 };
 

@@ -13,6 +13,7 @@ export default function useCustomerSimulation() {
   useEffect(() => {
     if (isRunning && customerWorker.current === null) {
       customerWorker.current = new CustomerWorker();
+      customerWorker.current.postMessage(['set-customers', customers]);
       customerWorker.current.onmessage = function (event) {
         const [type] = event.data;
         switch (type) {
@@ -36,16 +37,22 @@ export default function useCustomerSimulation() {
         const newCustomer = await generateCustomer(customers);
         customerWorker.current.postMessage(['add-customer', newCustomer]);
       }, 5000);
-    } else if (isRunning && !!generationTimeoutID.current) {
+    } else if (!isRunning && generationTimeoutID.current !== null) {
       clearTimeout(generationTimeoutID.current);
       generationTimeoutID.current = null;
     }
   }, [customers, isRunning]);
 
+  const stop = () => {
+    setRunning(false);
+    setCustomers([]);
+  }
+
   return {
     customers,
     isRunning,
-    toggle: () => setRunning(!isRunning)
+    toggle: () => setRunning(!isRunning),
+    stop
   };
 }
 
