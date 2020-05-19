@@ -1,6 +1,7 @@
 import {computePathToCoordinates, computePathToProduct} from '../services/pathfinding';
 import {purchaseProduct} from '../../product/services/resources';
 import {findExitCoordinates} from '../services/behaviors';
+import {postTransaction} from '../../transaction/services/resources';
 
 let customers = [];
 const [exitRow, exitCol] = findExitCoordinates();
@@ -23,7 +24,14 @@ setInterval(() => {
   const updatedCustomers = customers.map(customer => {
     const {row, col, targetIndex, path} = customer.travelling;
     if (row === exitRow && col === exitCol) {
-      // TODO : add transaction and remove customer from list
+      postTransaction({
+        user: customer.customer._id,
+        products: customer.shoppingList
+          .filter(({status}) => status === 'purchased')
+          .map(({_id}) => _id)
+      });
+
+      return null;
     }
 
     if (path === null) {
@@ -33,7 +41,7 @@ setInterval(() => {
     } else {
       return mapCustomerOnTargetProduct(customer, targetIndex);
     }
-  });
+  }).filter(customer => !!customer);
 
   customers = updatedCustomers;
   postMessage(['update-customers', updatedCustomers]);
