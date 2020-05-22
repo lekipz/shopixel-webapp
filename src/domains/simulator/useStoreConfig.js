@@ -1,30 +1,18 @@
-import {useState} from 'react';
-import storeConfiguration from '../../lib/mocks/storeConfiguration.json';
-import {getAllProducts} from '../product/services/resources';
+import {useRef, useState} from 'react';
+import StoreConfigWorker from './workers/store-config.worker';
 
 function useStoreConfig() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [shopConfig, setShopConfig] = useState(null);
+  const productRefillWorker = useRef(null);
 
-  if (!loading && !shopConfig) {
-    setLoading(true);
-    getAllProducts()
-      .then(products => storeConfiguration
-        .map(rowConfig => rowConfig
-          .map(cellConfig => {
-            if (cellConfig.type !== 'product') {
-              return cellConfig;
-            }
-            const product = products.find(({name}) => name === cellConfig.product);
-            return {
-              ...cellConfig,
-              product
-            };
-          })))
-      .then(builtShopConfig => {
-        setShopConfig(builtShopConfig);
-        setLoading(false);
-      });
+  if (productRefillWorker.current === null) {
+    productRefillWorker.current = new StoreConfigWorker();
+    productRefillWorker.current.onmessage = function(event) {
+      const {data} = event;
+      setShopConfig(data);
+      setLoading(false);
+    }
   }
 
   return {
