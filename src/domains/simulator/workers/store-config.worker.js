@@ -9,7 +9,7 @@ async function startReconfiguration() {
   const products = await getAllProducts();
   const mappedProducts = await Promise.all(products.map(product => {
     const threshold = Math.floor(product.maxStock * 0.25);
-    if (product.currentStock <= threshold) {
+    if (product.currentStock <= threshold && !product.refilling) {
       return refillProduct(product.name);
     }
     return product;
