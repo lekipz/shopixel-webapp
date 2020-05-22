@@ -2,9 +2,9 @@ import React from 'react';
 import useStoreConfig from '../useStoreConfig';
 import Shop from './shop/Shop';
 import styled from 'styled-components';
-import useCustomerSimulation from '../useCustomerSimulation';
 import Button from '../../../components/Button';
 import {faPause, faPlay, faStop} from '@fortawesome/free-solid-svg-icons';
+import useCustomerSimulation from '../useCustomerSimulation';
 
 const SimulatorContainer = styled.div`
   display: flex;
