@@ -9,7 +9,7 @@ export async function makeCustomerArrival(presentAccounts) {
     return registerNewCustomer();
   } else {
     const customer = await loginRandomAccount();
-    const existingCustomer = presentAccounts.find(account => account.email === customer.email);
+    const existingCustomer = presentAccounts.find(account => account._id === customer._id);
 
     if (existingCustomer) {
       return makeCustomerArrival(presentAccounts);

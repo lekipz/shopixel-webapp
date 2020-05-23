@@ -31,12 +31,13 @@ export default function useCustomerSimulation() {
   }, [isRunning, customers]);
 
   useEffect(() => {
-    if (isRunning && !generationTimeoutID.current) {
+    if (isRunning && !generationTimeoutID.current && !!customerWorker.current) {
+      const customerTimeout = Math.max(Math.exp(customers.length * 0.2) * 0.25, 1) * 900;
       generationTimeoutID.current = setTimeout(async () => {
         generationTimeoutID.current = null;
-        const newCustomer = await generateCustomer(customers);
+        const newCustomer = await generateCustomer(customers.map(({customer}) => customer));
         customerWorker.current.postMessage(['add-customer', newCustomer]);
-      }, 5000);
+      }, customerTimeout);
     } else if (!isRunning && generationTimeoutID.current !== null) {
       clearTimeout(generationTimeoutID.current);
       generationTimeoutID.current = null;
@@ -46,7 +47,7 @@ export default function useCustomerSimulation() {
   const stop = () => {
     setRunning(false);
     setCustomers([]);
-  }
+  };
 
   return {
     customers,
