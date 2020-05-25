@@ -11,6 +11,8 @@ onmessage = function (event) {
   switch (type) {
     case 'add-customer':
       customers.push(event.data[1]);
+      customers.map(({customer: {_id}}) => _id)
+        .filter((id, index, self) => self.indexOf(id) === index || console.log('Duplication détectée : ' + id));
       break;
     case 'set-customers':
       customers = event.data[1].slice();
