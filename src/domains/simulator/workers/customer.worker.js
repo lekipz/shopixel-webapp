@@ -10,9 +10,11 @@ onmessage = function (event) {
   const [type] = event.data;
   switch (type) {
     case 'add-customer':
-      customers.push(event.data[1]);
-      customers.map(({customer: {_id}}) => _id)
-        .filter((id, index, self) => self.indexOf(id) === index || console.log('Duplication détectée : ' + id));
+      const duplicate = customers.map(({customer: {_id}}) => _id)
+        .find((id) => event.data[1].customer._id === id);
+      if (!duplicate) {
+        customers.push(event.data[1]);
+      }
       break;
     case 'set-customers':
       customers = event.data[1].slice();

@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {makeCustomerArrival} from '../customer/services/behaviors';
 import {getShoppingList} from '../product/services/resources';
 import {findEntranceCoordinates} from './services/behaviors';
@@ -30,8 +30,8 @@ export default function useCustomerSimulation() {
     }
   }, [isRunning, customers]);
 
-  useEffect(() => {
-    if (isRunning && !generationTimeoutID.current && !!customerWorker.current && customers.length < 10) {
+  useLayoutEffect(() => {
+    if (isRunning && !generationTimeoutID.current && !!customerWorker.current && customers.length < 18) {
       const customerTimeout = Math.max(Math.exp(customers.length * 0.2) * 0.25, 1) * 900;
       generationTimeoutID.current = setTimeout(async () => {
         generationTimeoutID.current = null;
