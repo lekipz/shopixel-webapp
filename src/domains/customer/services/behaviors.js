@@ -8,14 +8,7 @@ export async function makeCustomerArrival(presentAccounts) {
   if (rng <= NEW_CUSTOMER_PROBABILITY) {
     return registerNewCustomer();
   } else {
-    const customer = await loginRandomAccount();
-    const existingCustomer = presentAccounts.find(account => account._id === customer._id);
-
-    if (existingCustomer) {
-      return makeCustomerArrival(presentAccounts);
-    }
-
-    return customer;
+    return await loginRandomAccount(presentAccounts);
   }
 }
 
@@ -38,10 +31,15 @@ async function registerNewCustomer() {
   };
 }
 
-async function loginRandomAccount() {
+async function loginRandomAccount(presentAccounts) {
   const randomAccount = await getRandomRegisteredUser();
   if (!randomAccount) {
     return registerNewCustomer();
+  }
+
+  const existingCustomer = presentAccounts.find(account => account.email === randomAccount.email);
+  if (existingCustomer) {
+    return makeCustomerArrival(presentAccounts);
   }
 
   const {email, firstName, lastName} = randomAccount;
