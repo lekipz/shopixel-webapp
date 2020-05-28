@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   faUtensils, 
   faChessKnight, 
@@ -31,7 +30,6 @@ import {
   faQuestionCircle,
   faMenorah
 } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const stylesByProductCategory = {
   'daily-groceries': {
