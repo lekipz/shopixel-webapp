@@ -13,7 +13,7 @@ pointer-events: none;
 user-select: none;
 white-space: nowrap;
 top: -6vh;
-`
+`;
 
 function Tooltip({productConfig}) {
     const {color, name} = productConfig;
@@ -22,6 +22,6 @@ function Tooltip({productConfig}) {
             {name}
         </TooltipContainer>
     )
-}
+};
 
 export default Tooltip;

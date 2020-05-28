@@ -20,7 +20,7 @@ const ProductCellContainer = styled(BasicCell)`
       transform: scale(1.2, 1.2)
     }
   }
-`
+`;
 
 function ShopProductCell({product}) {
   const [isShown, setShown] = useState(false);
@@ -34,6 +34,6 @@ function ShopProductCell({product}) {
       {isShown && <Tooltip productConfig={{color: productConfig, name: product.name}}/>}
     </ProductCellContainer>
   );
-}
+};
 
 export default ShopProductCell;

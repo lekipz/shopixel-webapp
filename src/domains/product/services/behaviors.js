@@ -99,24 +99,24 @@ const logoByProductName = {
   paint: faPaintRoller,
   screw: faScrewdriver,
   tools: faToolbox
-}
+};
 
 const defaultColor = {
   backgroundColor: 'lightgrey',
   outlineColor: 'black'
 };
-const defaultlogo = <FontAwesomeIcon icon={faQuestionCircle} size="3x"></FontAwesomeIcon>
+const defaultlogo = faQuestionCircle;
 
 
 
 export function getLogoFromProductName(name) {
   const logo = logoByProductName[name];
   return logo ? logo : defaultlogo
-}
+};
 export function getStylesFromProductCategory(category) {
   const styles = stylesByProductCategory[category];
   if (!styles) {
     return defaultColor
   }
   return styles;
-}
+};
