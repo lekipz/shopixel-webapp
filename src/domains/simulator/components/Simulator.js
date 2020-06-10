@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import useStoreConfig from '../useStoreConfig';
 import Shop from './shop/Shop';
 import styled from 'styled-components';
@@ -55,11 +55,13 @@ function Simulator() {
     toggle,
     stop
   } = useCustomerSimulation();
+
   if (loading) {
     return (
       <div>Loading...</div>
     );
   }
+
   return (
     <SimulatorContainer>
       <SimulatorAndButtonWrapper>
