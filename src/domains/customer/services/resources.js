@@ -10,3 +10,11 @@ export function getGeneratedAccount() {
 export function getRandomRegisteredUser() {
   return ShopixelAPI.get('/random');
 }
+
+export function getRecommendations(userId) {
+  return ShopixelAPI.get(`/${userId}/recommendations`);
+}
+
+export function createRecommendations(userId, shoppingList) {
+  return ShopixelAPI.post(`/${userId}/recommendations`, shoppingList);
+}

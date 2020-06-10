@@ -2,22 +2,25 @@ import {computePathToCoordinates, computePathToProduct} from '../services/pathfi
 import {purchaseProduct} from '../../product/services/resources';
 import {findExitCoordinates} from '../services/behaviors';
 import {postTransaction} from '../../transaction/services/resources';
+import {createRecommendations} from '../../customer/services/resources';
 
 let customers = [];
 const [exitRow, exitCol] = findExitCoordinates();
 
 onmessage = function (event) {
   const [type] = event.data;
+  const data = event.data[1];
   switch (type) {
     case 'add-customer':
       const duplicate = customers.map(({customer: {_id}}) => _id)
-        .find((id) => event.data[1].customer._id === id);
+        .find((id) => data.customer._id === id);
       if (!duplicate) {
-        customers.push(event.data[1]);
+        customers.push(data);
+        createRecommendations(data.customer._id, data.shoppingList)
       }
       break;
     case 'set-customers':
-      customers = event.data[1].slice();
+      customers = data.slice();
       break;
   }
 };
