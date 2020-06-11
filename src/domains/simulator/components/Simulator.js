@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import useStoreConfig from '../useStoreConfig';
 import Shop from './shop/Shop';
 import styled from 'styled-components';
@@ -7,14 +7,13 @@ import {faPause, faPlay, faStop} from '@fortawesome/free-solid-svg-icons';
 import useCustomerSimulation from '../useCustomerSimulation';
 import useProductDetails from '../../product/useProductDetails';
 import ProductDetails from '../../product/components/ProductDetails';
-import {getRecommendations} from '../../customer/services/resources';
 import CustomerDetails from '../../customer/components/CustomerDetails';
 import useCustomerDetails from '../../customer/useCustomerDetails';
 
-const SimulatorContainer = styled.div`
+const SimulatorContainer = styled.main`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: stretch;
   
   & > * {
@@ -28,13 +27,13 @@ const SimulatorAndButtonWrapper = styled.div`
   justify-content: flex-start; 
 `;
 
-const ShopContainer = styled.div`
+const ShopContainer = styled.section`
   display: flex;
   justify-content: center;
   margin-top: 2vh; 
 `;
 
-const ActionsContainer = styled.div`
+const ActionsContainer = styled.section`
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
