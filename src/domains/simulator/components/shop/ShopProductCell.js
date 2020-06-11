@@ -22,16 +22,18 @@ const ProductCellContainer = styled(BasicCell)`
   }
 `;
 
-function ShopProductCell({product}) {
+function ShopProductCell({product, selectProduct}) {
   const [isShown, setShown] = useState(false);
   const productConfig = getStylesFromProductCategory(product.category);
-  const logo = getLogoFromProductName(product.name)
+  const logo = getLogoFromProductName(product.name);
   return (
-    <ProductCellContainer {...productConfig} onMouseEnter={() => setShown(true)} onMouseLeave={() => setShown(false)}>
+    <ProductCellContainer {...productConfig} onMouseEnter={() => setShown(true)} 
+                                             onMouseLeave={() => setShown(false)}
+                                             onClick={() => selectProduct(product.name)}>
       <ProductLogo>
         <FontAwesomeIcon icon={logo} size="3x"></FontAwesomeIcon>
       </ProductLogo>
-      {isShown && <Tooltip productConfig={{color: productConfig, name: product.name}}/>}
+      {isShown && <Tooltip productConfig={{color: productConfig, name: product.displayName}}/>}
     </ProductCellContainer>
   );
 };

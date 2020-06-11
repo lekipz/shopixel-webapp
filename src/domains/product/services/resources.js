@@ -17,3 +17,7 @@ export function refillProduct(productName) {
 export function getShoppingList(profile) {
   return ShopixelAPI.get(`/shopping-list?profile=${profile}`);
 }
+
+export function getProductInventory(productName) {
+  return ShopixelAPI.get(`/${productName}`);
+}

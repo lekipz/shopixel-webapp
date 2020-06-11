@@ -4,13 +4,14 @@ import ShopProductCell from './ShopProductCell';
 import ShopDoorCell from './ShopDoorCell';
 import WallCell from './WallCell';
 
-function ShopCell({config}) {
+function ShopCell({config, selectProduct}) {
   const {type = ''} = config;
 
   switch (type) {
     case 'product':
       const {product} = config;
-      return <ShopProductCell product={product}/>;
+      return <ShopProductCell product={product}
+                              selectProduct={selectProduct}/>;
     case 'door':
       const {door} = config;
       return <ShopDoorCell door={door}/>;

@@ -9,12 +9,13 @@ const ShopRowContainer = styled.div`
   background-color: white;
 `
 
-function ShopRow({cellsConfig}) {
+function ShopRow({cellsConfig, selectProduct}) {
   return (
     <ShopRowContainer>
       {cellsConfig.map((cellConfig, index) => (
         <ShopCell config={cellConfig}
-                  key={index}/>
+                  key={index}
+                  selectProduct={selectProduct}/>
       ))}
     </ShopRowContainer>
   );

@@ -14,7 +14,7 @@ const BackgroundContainer = styled.div`
   border: solid 1px black;
 `;
 
-function Shop({rowsConfig, customers}) {
+function Shop({rowsConfig, customers, selectProduct}) {
   return (
     <ShopContainer cols={rowsConfig[0].length}>
       {customers.map(({customer: {_id}, travelling: {row, col}}) => (
@@ -25,7 +25,8 @@ function Shop({rowsConfig, customers}) {
       <BackgroundContainer>
         {rowsConfig.map((rowConfig, index) => (
           <ShopRow cellsConfig={rowConfig}
-                   key={index}/>
+                   key={index}
+                   selectProduct={selectProduct}/>
         ))}
       </BackgroundContainer>
     </ShopContainer>
