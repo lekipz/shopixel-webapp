@@ -29,6 +29,8 @@ function getColorByProduct(product) {
 }
 
 export default function CustomerDetails({customer}) {
+  const hasRecommendations = customer.recommendedProducts.length > 0;
+
   return (
     <CardContainer>
       <h2>{customer.customer.firstName} {customer.customer.lastName}</h2>
@@ -41,8 +43,8 @@ export default function CustomerDetails({customer}) {
                            size="3x"/>
         ))}
       </ProductList>
-      <h3>
-        Recommandations :
+      <h3>Recommandations :</h3>
+      {hasRecommendations ? (
         <ProductList>
           {customer.recommendedProducts.map(product => (
             <FontAwesomeIcon key={product.name}
@@ -50,7 +52,9 @@ export default function CustomerDetails({customer}) {
                              size="3x"/>
           ))}
         </ProductList>
-      </h3>
+      ) : (
+        <span>Aucun produit recommandé pour ce client.</span>
+      )}
     </CardContainer>
   );
 }
