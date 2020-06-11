@@ -9,6 +9,7 @@ import useProductDetails from '../../product/useProductDetails';
 import ProductDetails from '../../product/components/ProductDetails';
 import {getRecommendations} from '../../customer/services/resources';
 import CustomerDetails from '../../customer/components/CustomerDetails';
+import useCustomerDetails from '../../customer/useCustomerDetails';
 
 const SimulatorContainer = styled.div`
   display: flex;
@@ -20,11 +21,13 @@ const SimulatorContainer = styled.div`
     margin: 12px 0;
   }
 `;
+
 const SimulatorAndButtonWrapper = styled.div`
-display: flex;
-flex-flow: column nowrap;
-justify-content: flex-start; 
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start; 
 `;
+
 const ShopContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -49,33 +52,6 @@ const ActionsContainer = styled.div`
 `;
 
 function Simulator() {
-  const {selectProduct, selectedProduct} = useProductDetails();
-
-  const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const [loadingRecommendations, setLoadingRecommendations] = useState(false);
-
-  const selectCustomer = customer => {
-    if (loadingRecommendations) {
-      return;
-    }
-    setLoadingRecommendations(true);
-    getRecommendations(customer.customer._id)
-      .then(({products}) => products)
-      .catch(error => {
-        if (error.status === 404) {
-          return [];
-        }
-        throw error;
-      })
-      .then(recommendedProducts => {
-        setSelectedCustomer({
-          ...customer,
-          recommendedProducts
-        });
-        setLoadingRecommendations(false);
-      });
-  };
-
   const {shopConfig, loading} = useStoreConfig();
   const {
     customers,
@@ -83,11 +59,22 @@ function Simulator() {
     toggle,
     stop
   } = useCustomerSimulation();
+  const {selectProduct, selectedProduct, clear: clearProduct} = useProductDetails();
+  const {selectCustomer, selectedCustomer, clear: clearCustomer} = useCustomerDetails(customers);
 
   if (loading) {
     return (
       <div>Loading...</div>
     );
+  }
+
+  const handleSelectCustomer = customer => {
+    clearProduct();
+    selectCustomer(customer);
+  }
+  const handleSelectProduct = product => {
+    clearCustomer();
+    selectProduct(product);
   }
 
   return (
@@ -105,8 +92,8 @@ function Simulator() {
         <ShopContainer>
           <Shop rowsConfig={shopConfig}
                 customers={customers}
-                selectCustomer={selectCustomer}
-                selectProduct={selectProduct}/>
+                selectCustomer={handleSelectCustomer}
+                selectProduct={handleSelectProduct}/>
         </ShopContainer>
       </SimulatorAndButtonWrapper>
       {selectedProduct && (

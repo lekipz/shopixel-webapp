@@ -4,6 +4,7 @@ import {getProductInventory} from './services/resources';
 export default function useProductDetails() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isLoadingInventory, setIsLoadingInventory] = useState(false);
+
   const selectProduct = async (productName) => {
     if (isLoadingInventory) {
       return;
@@ -13,8 +14,12 @@ export default function useProductDetails() {
     setSelectedProduct(inventory);
     setIsLoadingInventory(false);
   };
+
+  const clear = () => setSelectedProduct(null);
+
   return {
     selectedProduct,
-    selectProduct
+    selectProduct,
+    clear
   };
 }
