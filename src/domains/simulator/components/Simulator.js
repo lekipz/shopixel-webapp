@@ -8,6 +8,7 @@ import useCustomerSimulation from '../useCustomerSimulation';
 import useProductDetails from '../../product/useProductDetails';
 import ProductDetails from '../../product/components/ProductDetails';
 import {getRecommendations} from '../../customer/services/resources';
+import CustomerDetails from '../../customer/components/CustomerDetails';
 
 const SimulatorContainer = styled.div`
   display: flex;
@@ -108,8 +109,12 @@ function Simulator() {
                 selectProduct={selectProduct}/>
         </ShopContainer>
       </SimulatorAndButtonWrapper>
-      {selectedProduct && <ProductDetails selectedProduct={selectedProduct}>
-      </ProductDetails>}
+      {selectedProduct && (
+        <ProductDetails selectedProduct={selectedProduct}/>
+      )}
+      {selectedCustomer && (
+        <CustomerDetails customer={selectedCustomer}/>
+      )}
     </SimulatorContainer>
   );
 }

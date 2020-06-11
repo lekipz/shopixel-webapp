@@ -1,40 +1,31 @@
 import styled from 'styled-components';
-import {getStylesFromProductCategory, getLogoFromProductName} from '../services/behaviors'
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {getLogoFromProductName, getStylesFromProductCategory} from '../services/behaviors';
+import React from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import CardContainer from '../../../components/CardContainer';
 
-const InventoryContainer = styled.div`
-display: flex;
-flex-flow: column nowrap;
-align-items: center; 
-border: solid 1px ${props => props.outlineColor};
-background-color: ${props => props.backgroundColor};
-margin-top: 8.7vh !important;
-margin-left: 2vh !important;
-padding: 4vh;
-text-align: center;
-`
 const Stock = styled.div`
-display: flex
-flex-flow: column nowrap;
-font-size: 1.3em;
-font-weight: bold;
-margin: 5vh;
-`
-function ProductDetails ({selectedProduct}) {
-    const {displayName, currentStock, maxStock, category, name} = selectedProduct;
-    const productConfig = getStylesFromProductCategory(category);
-    const logo = getLogoFromProductName(name);
-    return(
-        <InventoryContainer {...productConfig}>
-            <FontAwesomeIcon icon={logo} size="4x"/>
-            <h2>{displayName}</h2>
-            <Stock>
-                <p>Stock courrant: {currentStock}</p>
-                <p>Stock maximum: {maxStock}</p>
-            </Stock>
-        </InventoryContainer>
-    )
-} 
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 5vh 5%;
+`;
+
+function ProductDetails({selectedProduct}) {
+  const {displayName, currentStock, maxStock, category, name} = selectedProduct;
+  const productConfig = getStylesFromProductCategory(category);
+  const logo = getLogoFromProductName(name);
+  return (
+    <CardContainer {...productConfig}>
+      <FontAwesomeIcon icon={logo} size="4x"/>
+      <h2>{displayName}</h2>
+      <Stock>
+        <p>Stock : {currentStock}/{maxStock}</p>
+      </Stock>
+    </CardContainer>
+  );
+}
 
 export default ProductDetails;
