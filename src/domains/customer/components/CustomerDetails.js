@@ -16,14 +16,14 @@ const ProductList = styled.div`
 
 function getColorByProduct(product) {
   switch (product.status) {
-    case 'todo':
-      return 'black';
     case 'pending':
       return 'orange';
     case 'purchased':
       return 'green';
     case 'out-of-stock':
       return 'red';
+    default:
+      return 'black';
   }
 }
 

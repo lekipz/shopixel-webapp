@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Tooltip from '../Tooltip';
 import BasicCell from './BasicCell';
 import {getLogoFromProductName, getStylesFromProductCategory} from '../../../product/services/behaviors';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
