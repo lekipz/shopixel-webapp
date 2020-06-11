@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CardContainer from '../../../components/CardContainer';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {getLogoFromProductName} from '../../product/services/behaviors';
+import CustomerDetailsProduct from './CustomerDetailsProduct';
 
 const ProductList = styled.div`
   display: flex;
@@ -37,19 +36,15 @@ export default function CustomerDetails({customer}) {
       <h3>Liste de courses :</h3>
       <ProductList>
         {customer.shoppingList.map(product => (
-          <FontAwesomeIcon key={product.name}
-                           icon={getLogoFromProductName(product.name)}
-                           color={getColorByProduct(product)}
-                           size="3x"/>
+          <CustomerDetailsProduct product={product}
+                                  color={getColorByProduct(product)}/>
         ))}
       </ProductList>
       <h3>Recommandations :</h3>
       {hasRecommendations ? (
         <ProductList>
           {customer.recommendedProducts.map(product => (
-            <FontAwesomeIcon key={product.name}
-                             icon={getLogoFromProductName(product.name)}
-                             size="3x"/>
+            <CustomerDetailsProduct product={product}/>
           ))}
         </ProductList>
       ) : (
