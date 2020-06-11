@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import Button from '../../../components/Button';
 import {faPause, faPlay, faStop} from '@fortawesome/free-solid-svg-icons';
 import useCustomerSimulation from '../useCustomerSimulation';
-import useInventory from '../../inventory/useInventory'
-import Inventory from '../../inventory/components/Inventory'
+import useProductDetails from '../../product/useProductDetails'
+import ProductDetails from '../../product/components/ProductDetails'
 
 const SimulatorContainer = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const ActionsContainer = styled.div`
 `;
 
 function Simulator() {
-  const {selectProduct, selectedProduct} = useInventory()
+  const {selectProduct, selectedProduct} = useProductDetails()
   const {shopConfig, loading} = useStoreConfig();
   const {
     customers,
@@ -80,8 +80,8 @@ function Simulator() {
                 selectProduct={selectProduct}/>
         </ShopContainer>
       </SimulatorAndButtonWrapper>
-      {selectedProduct && <Inventory selectedProduct={selectedProduct}>
-                          </Inventory>}
+      {selectedProduct && <ProductDetails selectedProduct={selectedProduct}>
+                          </ProductDetails>}
     </SimulatorContainer>
   );
 }

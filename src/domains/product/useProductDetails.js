@@ -1,7 +1,7 @@
 import {useState} from 'react'
-import {getProductInventory} from '../product/services/resources';
+import {getProductInventory} from './services/resources';
 
-export default function useInventory(){
+export default function useProductDetails() {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isLoadingInventory, setIsLoadingInventory] = useState(false);
     const selectProduct = async (productName) => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {getStylesFromProductCategory, getLogoFromProductName} from '../../product/services/behaviors'
+import {getStylesFromProductCategory, getLogoFromProductName} from '../services/behaviors'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -21,13 +21,13 @@ font-size: 1.3em;
 font-weight: bold;
 margin: 5vh;
 `
-function Inventory ({selectedProduct}) {
+function ProductDetails ({selectedProduct}) {
     const {displayName, currentStock, maxStock, category, name} = selectedProduct;
     const productConfig = getStylesFromProductCategory(category);
     const logo = getLogoFromProductName(name);
     return(
         <InventoryContainer {...productConfig}>
-            <FontAwesomeIcon icon={logo} size="4x"></FontAwesomeIcon>
+            <FontAwesomeIcon icon={logo} size="4x"/>
             <h2>{displayName}</h2>
             <Stock>
                 <p>Stock courrant: {currentStock}</p>
@@ -37,4 +37,4 @@ function Inventory ({selectedProduct}) {
     )
 } 
 
-export default Inventory
+export default ProductDetails;
