@@ -14,13 +14,14 @@ const BackgroundContainer = styled.div`
   border: solid 1px black;
 `;
 
-function Shop({rowsConfig, customers, selectProduct}) {
+function Shop({rowsConfig, customers, selectProduct, selectCustomer}) {
   return (
     <ShopContainer cols={rowsConfig[0].length}>
-      {customers.map(({customer: {_id}, travelling: {row, col}}) => (
-        <Customer key={_id}
-                  row={row}
-                  col={col}/>
+      {customers.map((customer) => (
+        <Customer key={customer.customer._id}
+                  onSelect={() => selectCustomer(customer)}
+                  row={customer.travelling.row}
+                  col={customer.travelling.col}/>
       ))}
       <BackgroundContainer>
         {rowsConfig.map((rowConfig, index) => (

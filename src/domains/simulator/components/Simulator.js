@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import useStoreConfig from '../useStoreConfig';
 import Shop from './shop/Shop';
 import styled from 'styled-components';
 import Button from '../../../components/Button';
 import {faPause, faPlay, faStop} from '@fortawesome/free-solid-svg-icons';
 import useCustomerSimulation from '../useCustomerSimulation';
-import useProductDetails from '../../product/useProductDetails'
-import ProductDetails from '../../product/components/ProductDetails'
+import useProductDetails from '../../product/useProductDetails';
+import ProductDetails from '../../product/components/ProductDetails';
+import {getRecommendations} from '../../customer/services/resources';
 
 const SimulatorContainer = styled.div`
   display: flex;
@@ -22,7 +23,7 @@ const SimulatorAndButtonWrapper = styled.div`
 display: flex;
 flex-flow: column nowrap;
 justify-content: flex-start; 
-`
+`;
 const ShopContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -47,7 +48,33 @@ const ActionsContainer = styled.div`
 `;
 
 function Simulator() {
-  const {selectProduct, selectedProduct} = useProductDetails()
+  const {selectProduct, selectedProduct} = useProductDetails();
+
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [loadingRecommendations, setLoadingRecommendations] = useState(false);
+
+  const selectCustomer = customer => {
+    if (loadingRecommendations) {
+      return;
+    }
+    setLoadingRecommendations(true);
+    getRecommendations(customer.customer._id)
+      .then(({products}) => products)
+      .catch(error => {
+        if (error.status === 404) {
+          return [];
+        }
+        throw error;
+      })
+      .then(recommendedProducts => {
+        setSelectedCustomer({
+          ...customer,
+          recommendedProducts
+        });
+        setLoadingRecommendations(false);
+      });
+  };
+
   const {shopConfig, loading} = useStoreConfig();
   const {
     customers,
@@ -77,11 +104,12 @@ function Simulator() {
         <ShopContainer>
           <Shop rowsConfig={shopConfig}
                 customers={customers}
+                selectCustomer={selectCustomer}
                 selectProduct={selectProduct}/>
         </ShopContainer>
       </SimulatorAndButtonWrapper>
       {selectedProduct && <ProductDetails selectedProduct={selectedProduct}>
-                          </ProductDetails>}
+      </ProductDetails>}
     </SimulatorContainer>
   );
 }

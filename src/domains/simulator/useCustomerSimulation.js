@@ -36,7 +36,9 @@ export default function useCustomerSimulation() {
       generationTimeoutID.current = setTimeout(async () => {
         generationTimeoutID.current = null;
         const newCustomer = await generateCustomer(customers.map(({customer}) => customer));
-        customerWorker.current.postMessage(['add-customer', newCustomer]);
+        if (customerWorker.current) {
+          customerWorker.current.postMessage(['add-customer', newCustomer]);
+        }
       }, customerTimeout);
     } else if (!isRunning && generationTimeoutID.current !== null) {
       clearTimeout(generationTimeoutID.current);
