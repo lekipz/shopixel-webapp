@@ -29,6 +29,7 @@ function getColorByProduct(product) {
 
 export default function CustomerDetails({customer}) {
   const hasRecommendations = customer.recommendedProducts.length > 0;
+  const hasManyRecommendations = customer.recommendedProducts.length > 1;
 
   return (
     <CardContainer>
@@ -40,7 +41,7 @@ export default function CustomerDetails({customer}) {
                                   color={getColorByProduct(product)}/>
         ))}
       </ProductList>
-      <h3>Recommandations :</h3>
+      <h3>Recommandation{hasManyRecommendations && 's'} :</h3>
       {hasRecommendations ? (
         <ProductList>
           {customer.recommendedProducts.map(product => (
