@@ -5,31 +5,35 @@ import styled from 'styled-components';
 import Button from '../../../components/Button';
 import {faPause, faPlay, faStop} from '@fortawesome/free-solid-svg-icons';
 import useCustomerSimulation from '../useCustomerSimulation';
-import useInventory from '../../inventory/useInventory'
-import Inventory from '../../inventory/components/Inventory'
+import useProductDetails from '../../product/useProductDetails';
+import ProductDetails from '../../product/components/ProductDetails';
+import CustomerDetails from '../../customer/components/CustomerDetails';
+import useCustomerDetails from '../../customer/useCustomerDetails';
 
-const SimulatorContainer = styled.div`
+const SimulatorContainer = styled.main`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: stretch;
   
   & > * {
     margin: 12px 0;
   }
 `;
+
 const SimulatorAndButtonWrapper = styled.div`
-display: flex;
-flex-flow: column nowrap;
-justify-content: flex-start; 
-`
-const ShopContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start; 
+`;
+
+const ShopContainer = styled.section`
   display: flex;
   justify-content: center;
   margin-top: 2vh; 
 `;
 
-const ActionsContainer = styled.div`
+const ActionsContainer = styled.section`
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -47,7 +51,6 @@ const ActionsContainer = styled.div`
 `;
 
 function Simulator() {
-  const {selectProduct, selectedProduct} = useInventory()
   const {shopConfig, loading} = useStoreConfig();
   const {
     customers,
@@ -55,11 +58,22 @@ function Simulator() {
     toggle,
     stop
   } = useCustomerSimulation();
+  const {selectProduct, selectedProduct, clear: clearProduct} = useProductDetails();
+  const {selectCustomer, selectedCustomer, clear: clearCustomer} = useCustomerDetails(customers);
 
   if (loading) {
     return (
       <div>Loading...</div>
     );
+  }
+
+  const handleSelectCustomer = customer => {
+    clearProduct();
+    selectCustomer(customer);
+  }
+  const handleSelectProduct = product => {
+    clearCustomer();
+    selectProduct(product);
   }
 
   return (
@@ -77,11 +91,16 @@ function Simulator() {
         <ShopContainer>
           <Shop rowsConfig={shopConfig}
                 customers={customers}
-                selectProduct={selectProduct}/>
+                selectCustomer={handleSelectCustomer}
+                selectProduct={handleSelectProduct}/>
         </ShopContainer>
       </SimulatorAndButtonWrapper>
-      {selectedProduct && <Inventory selectedProduct={selectedProduct}>
-                          </Inventory>}
+      {selectedProduct && (
+        <ProductDetails selectedProduct={selectedProduct}/>
+      )}
+      {selectedCustomer && (
+        <CustomerDetails customer={selectedCustomer}/>
+      )}
     </SimulatorContainer>
   );
 }
